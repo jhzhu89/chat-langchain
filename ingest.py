@@ -14,7 +14,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.utils.html import (PREFIXES_TO_IGNORE_REGEX,
                                   SUFFIXES_TO_IGNORE_REGEX)
 from langchain.vectorstores import Weaviate
-from voyage import VoyageEmbeddings
+from langchain.embeddings import VoyageEmbeddings
 
 from constants import WEAVIATE_DOCS_INDEX_NAME
 
@@ -82,7 +82,7 @@ def load_api_docs():
 def get_embeddings_model() -> Embeddings:
     if os.environ.get("VOYAGE_AI_URL") and os.environ.get("VOYAGE_AI_MODEL"):
         return VoyageEmbeddings()
-    return OpenAIEmbeddings(chunk_size=200)
+    return OpenAIEmbeddings(chunk_size=1)
 
 
 def ingest_docs():

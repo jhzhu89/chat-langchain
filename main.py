@@ -9,7 +9,7 @@ import langsmith
 import weaviate
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from langchain.chat_models import ChatOpenAI
+from langchain.chat_models import AzureChatOpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.embeddings.voyageai import VoyageEmbeddings
 from langchain.prompts import (ChatPromptTemplate, MessagesPlaceholder,
@@ -201,10 +201,8 @@ def create_chain(
     )
 
 
-llm = ChatOpenAI(
-    model="gpt-3.5-turbo-16k",
-    streaming=True,
-    temperature=0,
+llm = AzureChatOpenAI(
+    deployment_name="gpt-4-32k",
 )
 retriever = get_retriever()
 answer_chain = create_chain(
